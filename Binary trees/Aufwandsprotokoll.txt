@@ -1,0 +1,35 @@
+avlTree by Sven Pollanka and Lukas Rittler
+
+Dieses Programm dient dazu, aus einem .txt File ausgelesene Werte in einen BST zu sortieren, 
+zu kontrollieren ob dieser ein AVL-Tree ist und Statistiken zu diesem auszugeben.
+
+Die genutzten rekursiven Funktionen sind min, max, calculateAverage, printTree, Node::addNode
+und Node::calculateHeight.
+
+Die min Funktion hat im best Case wenn die Wurzel der kleinte Eintrag ist einen Aufwand 
+von O(1). Anonsten ist der Aufwand O(n) (eigentlich n/2 aber Konstanten werden vernachlässigt)
+da die Funtion rekursiv durch die linke Hälfte des Baumes iterieren muss bis sie das kleinste
+(also linkeste) Element gefunden hat. Gleiches gilt für max, klarerweise auf der rechten Seite
+statt linken Seite.
+
+calculateAverage summiert alle im Baum vorhandenen Werte und zählt wieviele Einträge vorhanden
+sind. Anschließend teilt er die Summe durch die Anzahl um einen Durchschnittswert zu erhalten. 
+Der Aufwand ist ebenfallst O(n) da jede Node des Baumes aufgerufen wird und zur Summe hinzugefügt
+wird. n ist die Anzahl der Werte im Baum.
+
+printTree arbeitet genau nach dem gleichen Prinzip, da auch jede Node des Baumes einmal aufgerufen
+werden muss wesshalb der Aufwand ebenfalls O(n) beträgt. Die Funktion gibt jeden Wert des Baumes aus
+und überprüft gleichzeitig ob sein Balancefaktor 1 überschreitet und somit eine AVL Verletzung gegeben
+ist.
+
+Node::addNode hat einen Aufwand von O(n) (eigentlich n/2-x, x steht für alle Werte die nicht auf dem 
+Weg zum zukünftigen Platz von den neues Wert sind, /2 da ja nur durch eine Hälfte des Baumes gegangen
+wird), da die Funktion solange rekursiv aufgerufen wird bis ein freier Platz gefunden ist. Dabei geht
+die Funktion je nach dem ob der neue Wert kleiner bzw. größer ist immer jeweils rechts/links weiter.
+
+Node::calculateHeight berechnet die Höhe eines Baumes indem sie zuerst bis zum letzten Leaf durch jeden 
+möglichen Baum geht. Anschließend geht sie rückwärts nach oben zurück und vergleicht bei jeder Node ob der 
+linke oder rechte Subtree größer ist um zu eintscheiden welchen Wert sie ausgibt um für die nächst höhere Node
+den höchst möglichen Subtree zu returnen. Es gilt ebenfalls ein Aufwand von O(n) da diese für jede vorhandene
+Node aufgerufen wird. Im Falle, dass sich im Baum nur ein Eintrag befindet ist der Aufwand O(1). Ebenfalls
+O(1) ist der Aufwand, wenn die Funtion Node::calculateHeight für ein Leaf aufgerufen wird.
